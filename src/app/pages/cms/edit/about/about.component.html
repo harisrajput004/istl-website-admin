@@ -1,0 +1,107 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <div class="flex justify-between w-full">
+        <h3>About Page</h3>
+    </div>
+
+    <div class="overflow-y-auto max-h-[465px]">
+        <form (ngSubmit)="onSubmit()">
+
+            <div class="py-[35px] px-[30px] rounded-[15px] bg-[#F2F2F2]" *ngIf="sections?.length > 0">
+                <div class="flex flex-col gap-[20px]">
+                    <h3 class="text-[#333] font-medium">Section 1</h3>
+
+                    <div class="flex flex-col gap-[20px]">
+                        <input type="hidden" value="{{sections[0].id}}">
+                        <input type="hidden" value="{{pageId}}">
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium">Banner Image</label>
+                            <div *ngIf="sections[2]?.backgroundImagePath" class="mb-3">
+                                <p class="text-sm text-gray-500 mb-1">Current Banner:</p>
+                                <img [src]="sections[2].backgroundImagePath" alt="Current banner image"
+                                    class="w-full max-w-md h-auto object-cover rounded">
+                            </div>
+                            <app-single-image-upload (imageSelected)="onBannerSelected($event)" [isInvalid]="false">
+                            </app-single-image-upload>
+                            <div class="text-sm text-gray-500">
+                                Leave empty to keep current banner
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium">First Section Image</label>
+                            <div *ngIf="sections[0]?.sectionImagePath" class="mb-3">
+                                <p class="text-sm text-gray-500 mb-1">Current Image:</p>
+                                <img [src]="sections[0].sectionImagePath" alt="Current first section image"
+                                    class="w-full max-w-md h-auto object-cover rounded">
+                            </div>
+                            <app-single-image-upload (imageSelected)="onFirstSectionSelected($event)"
+                                [isInvalid]="false">
+                            </app-single-image-upload>
+                            <div class="text-sm text-gray-500">
+                                Leave empty to keep current image
+                            </div>
+                        </div>
+
+                        <!-- Second Section Image Upload -->
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium">Second Section Image</label>
+                            <div *ngIf="sections[1]?.sectionImagePath" class="mb-3">
+                                <p class="text-sm text-gray-500 mb-1">Current Image:</p>
+                                <img [src]="sections[1].sectionImagePath" alt="Current second section image"
+                                    class="w-full max-w-md h-auto object-cover rounded">
+                            </div>
+                            <app-single-image-upload (imageSelected)="onSecondSectionSelected($event)"
+                                [isInvalid]="false">
+                            </app-single-image-upload>
+                            <div class="text-sm text-gray-500">
+                                Leave empty to keep current image
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="title">Title</label>
+                            <input id="title"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                type="text" name="about-title" [(ngModel)]="sections[0].title">
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="description">Description</label>
+                            <textarea id="description"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[150px] max-h-[200px] overflow-y-auto"
+                                rows="3" name="about-desc" [(ngModel)]="sections[0].description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-[35px] px-[30px] rounded-t-[15px] rounded-br-none rounded-bl-none bg-[#F2F2F2]" *ngIf="sections?.length > 1">
+                <div class="flex flex-col gap-[20px]">
+                    <h3 class="text-[#333] font-medium">Section 2</h3>
+
+                    <div class="flex flex-col gap-[20px]">
+                        <input type="hidden" value="{{sections[1].id}}">
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="">Title</label>
+                            <input
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-nornmal"
+                                type="text" name="sec2-title" [(ngModel)]="sections[1].title">
+                        </div>
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="description2">Description</label>
+                            <textarea id="description2"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[150px] max-h-[200px] overflow-y-auto"
+                                rows="3" name="sec2-desc" [(ngModel)]="sections[1].description"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex justify-end gap-[10px] w-full pb-[35px] px-[30px] bg-[#F2F2F2]">
+                <button type="submit" class="primary_button cursor-pointer" [disabled]="saving" (click)="onSubmit()">
+                    {{ saving ? 'Saving...' : 'Save' }}
+                </button> <a routerLink="/cms" class="transarent_button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

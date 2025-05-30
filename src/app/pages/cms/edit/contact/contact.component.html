@@ -1,0 +1,67 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+  <div class="flex justify-between w-full">
+    <h3>Contact Page</h3>
+  </div>
+  <div class="overflow-y-auto h-[465px]">
+    <form (ngSubmit)="onSubmit()">
+      <div class="py-[35px] px-[30px] rounded-[15px] bg-[#F2F2F2]" *ngIf="data">
+        <div class="flex flex-col gap-[20px]">
+          <h3 class="text-[#333] font-medium">Contact Information</h3>
+
+          <div class="flex flex-col gap-[15px]">
+            <label class="text-[#333] font-medium">Banner Image</label>
+            <div *ngIf="data.bannerImage" class="mb-3">
+                <p class="text-sm text-gray-500 mb-1">Current Banner:</p>
+                <img [src]="data.bannerImage" alt="Current banner image"
+                    class="w-full max-w-md h-auto object-cover rounded">
+            </div>
+            <app-single-image-upload (imageSelected)="onBannerSelected($event)" [isInvalid]="false">
+            </app-single-image-upload>
+            <div class="text-sm text-gray-500">
+                Leave empty to keep current banner
+            </div>
+        </div>
+
+          <div class="flex flex-col gap-[15px]">
+            <label class="text-[#333] font-medium" for="phone">Phone Number</label>
+            <input id="phone"
+              class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-nornmal"
+              type="text" [(ngModel)]="data.phoneNo" name="phone">
+          </div>
+
+          <div class="flex flex-col gap-[15px]">
+            <label class="text-[#333] font-medium" for="email">Email</label>
+            <input id="email"
+              class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-nornmal"
+              type="email" [(ngModel)]="data.email" name="email">
+          </div>
+
+          <div class="flex flex-col gap-[15px]">
+            <label class="text-[#333] font-medium" for="address">Address</label>
+            <textarea id="address"
+              class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[100px] max-h-[200px] overflow-y-auto"
+              [(ngModel)]="data.address" name="address"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="py-[35px] px-[30px] rounded-t-[15px] rounded-br-none rounded-bl-none bg-[#F2F2F2] mt-5" *ngIf="data?.socialLinks?.length">
+        <h3 class="text-[#333] font-medium mb-3">Social Links</h3>
+        <div class="flex gap-[15px] flex-col">
+          <div class="flex flex-col gap-[10px]" *ngFor="let link of data.socialLinks">
+            <label class="text-[#333] font-medium" for="platform-{{link.id}}">{{ link.platformName }}</label>
+            <input id="platform-{{link.id}}"
+              class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+              type="text" [(ngModel)]="link.url" name="social-{{link.id}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-[10px] w-full pb-[35px] px-[30px] bg-[#F2F2F2]">
+        <button type="submit" class="primary_button cursor-pointer" [disabled]="saving" (click)="onSubmit()">
+            {{ saving ? 'Saving...' : 'Save' }}
+        </button> <a routerLink="/cms" class="transarent_button">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <div class="flex justify-between w-full">
+        <h3>Sitemap Page</h3>
+    </div>
+
+    <div class="overflow-y-auto max-h-[465px]">
+        <form (ngSubmit)="onSubmit()">
+            <div class="py-[35px] px-[30px] rounded-[15px] bg-[#F2F2F2]" *ngIf="sections?.length > 0">
+                <div class="flex flex-col gap-[20px]">
+                    <h3 class="text-[#333] font-medium">Section 1</h3>
+
+                    <div class="flex flex-col gap-[20px]">
+                        <input type="hidden" value="{{sections[0].id}}">
+                        <input type="hidden" value="{{pageId}}">
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium">Banner Image</label>
+                            <div *ngIf="sections[0]?.backgroundImagePath" class="mb-3">
+                                <p class="text-sm text-gray-500 mb-1">Current Banner:</p>
+                                <img [src]="sections[0].backgroundImagePath" alt="Current banner image"
+                                    class="w-full max-w-md h-auto object-cover rounded">
+                            </div>
+                            <app-single-image-upload (imageSelected)="onBannerSelected($event)" [isInvalid]="false">
+                            </app-single-image-upload>
+                            <div class="text-sm text-gray-500">
+                                Leave empty to keep current banner
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-[10px] w-full pb-[35px] px-[30px] bg-[#F2F2F2]">
+                <button type="submit" class="primary_button cursor-pointer" [disabled]="saving" (click)="onSubmit()">
+                    {{ saving ? 'Saving...' : 'Save' }}
+                </button> <a routerLink="/cms" class="transarent_button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

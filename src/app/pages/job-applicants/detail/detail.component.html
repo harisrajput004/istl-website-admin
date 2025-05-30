@@ -1,0 +1,37 @@
+<div class="font-normal font_inter font-[#010101] py-8">
+    <h3>Job Applicant</h3>
+  </div>
+  
+  <div *ngIf="jobApplicant" class="bg-[#FFF] rounded-[20px] py-[40px] px-[30px] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.05)] overflow-y-auto max-h-[465px]">
+    <div class="flex gap-x-2">
+      <fa-icon [icon]="faCalendar" class="text-[#B0B0B0] opacity-50 text-xl relative -translate-y-0.5"></fa-icon>
+      <p>Posted Date</p>
+      <p class="text-[#B0B0B0]">{{ jobApplicant.createdOn | date: 'd, MMM y' }}</p> 
+    </div>
+  
+    <div class="font-normal font_inter pt-2 flex flex-col space-y-2 text-[#454545]">
+      <h3 class="text-[24px] text-[#010101] font-semibold">{{ jobApplicant.fullName }}</h3>
+      <p>{{ jobApplicant.email }}</p>
+      <p>{{ jobApplicant.contact }}</p>
+      <p class="font_12px rounded-[50px] w-fit px-[14px] py-[6px] bg-[#EEE]">{{ jobApplicant.jobName }}</p>
+    </div>
+  
+    <div class="text-[#454545] pt-5 flex flex-col">
+      <h5 class="font-bold">Message</h5>
+      <p class="font_14px py-[15px]">
+        {{ jobApplicant.message }}
+      </p>
+    </div>
+  
+    <div class="font-normal font_inter text-[18px] pt-[30px] font-semibold text-[#454545] flex flex-col gap-[20px]">
+      <p>Resume Document</p>
+      <a [href]="jobApplicant.fileRelativePath" target="_blank" class="flex border border-[#D1D5DB] rounded-[10px] backdrop-blur-[40px]">
+        <fa-icon [icon]="faClone" class="opacity-50 text-7xl py-[20px] pl-[16px]"></fa-icon>
+        <div class="p-[20px] px-[16px] flex flex-col gap-[10px]">
+          <p class="text-[14px]">{{ getFileName(jobApplicant.fileRelativePath) }}</p>
+          <p class="text-[12px]">{{ jobApplicant.createdOn | date: 'd, MMM y' }}</p>
+        </div>  
+      </a>
+    </div>
+  </div>
+  

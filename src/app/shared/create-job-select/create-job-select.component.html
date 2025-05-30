@@ -1,0 +1,12 @@
+<div class="relative w-full">
+    <select [(ngModel)]="selectedValue"
+        class="w-full px-[18px] py-[12px] text-[#767F8C] rounded-[6px] border border-[#A7A7A7] bg-[#FFF] appearance-none">
+        <option value="">Select...</option>
+        <option *ngFor="let option of options" [value]="option.value">
+            {{ option.label }}
+        </option>
+    </select>
+    <span class="absolute right-[18px] top-[50%] transform -translate-y-[50%] pointer-events-none">
+        <fa-icon [icon]="faChevronDown"></fa-icon>
+    </span>
+</div>

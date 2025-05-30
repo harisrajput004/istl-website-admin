@@ -1,0 +1,46 @@
+<section class="font_inter my-[30px]">
+    <div class="flex flex-col gap-[20px]">
+        <div class="flex justify-between">
+            <h3 class="text-[#010101] font-normal">Job Categories</h3>
+            <a routerLink="/job-categories/create" class="primary_button">Create Category</a>
+        </div>
+        <div class="grid grid-cols-3 gap-[20px] overflow-y-auto max-h-[450px]">
+            <div *ngFor="let category of jobCategories"
+                class="p-[20px] rounded-[10px] border border-[#CBCBCB] bg-[#FAFBFB] flex flex-col gap-[10px]">
+                <div class="flex gap-[10px] items-center pb-[10px] border-b border-[#BABABA]">
+                    <div class="w-[70px] h-[70px] flex justify-center items-center rounded-[6px]"
+                        style="background-color: #b6b6b6;">
+                        <img [src]="category.imagePath || 'assets/images/default-job.png'"
+                            class="w-[30px] h-[30px] object-contain" alt="{{ category.jobCategoryName }}"
+                            onerror="this.src='assets/images/default-job.png'">
+                    </div>
+                    <div class="flex flex-col gap-[10px] w-full">
+                        <div class="flex justify-between w-full">
+                            <h5>{{ category.jobCategoryName }}</h5>
+                            <button *ngIf="canDelete" (click)="openDeleteConfirmation(category.id)" class="cursor-pointer text-red-500 hover:text-red-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex gap-[12px] flex-wrap">
+                            <div class="px-[3px] py-[2px] rounded-[5px] bg-[#F1F2F4]">
+                                <!-- <p class="font_14px text-[#232323]">{{ category.description || 'No description' }}</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-[10px] w-full">
+                    <a [routerLink]="['/job-categories/edit/'+ category.id]"
+                        class="primary_button cursor-pointer px-4 py-2">Update</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<app-confirmation-modal 
+    *ngIf="showConfirmationModal"
+    (confirmed)="handleConfirmation($event)">
+</app-confirmation-modal>

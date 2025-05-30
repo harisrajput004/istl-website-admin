@@ -1,0 +1,29 @@
+
+<!-- sidebar height according to desktop screen: min-h-[calc(100vh_-_60px)] -->
+
+<div class="p-[20px] sidebar rounded-[10px] bg-gradient-to-tr from-[#9D2E42] via-[#9D2E42] to-[#51131F] max-w-[260px] h-full flex flex-col font_inter min-h-[calc(100vh-60px)]">
+
+    <div class="flex-1 flex flex-col gap-[90px]">
+        <div class="flex flex-col gap-[50px]">
+            <a routerLink="/dashboard">
+                <div class="logo min-w-[210px]">
+                    <img src="/images/logo.png" class="w-full h-full" alt="">
+                </div>
+            </a>
+    
+            <ul class="links flex flex-col gap-[10px]">
+                <li><a [class.active]="isActive(['', '/dashboard'])" routerLink="/dashboard" class="py-[8px] px-[16px] w-full inline-block">Dashboard</a></li>
+                <li><a [class.active]="isActive(['/jobs', '/jobs/create', '/job/edit/{$id}'])" routerLink="/jobs" class="py-[8px] px-[16px] w-full inline-block">Jobs</a></li>
+                <li><a [class.active]="isActive(['/job-categories', '/job-categories/create', '/job-categories/edit/{$id}'])" routerLink="/job-categories" class="py-[8px] px-[16px] w-full inline-block">Job Categories</a></li>
+                <li><a [class.active]="isActive(['/job-applicants', '/job-applicants/{$id}', '/job-applicants/details/{$id}'])" routerLink="/job-applicants" class="py-[8px] px-[16px] w-full inline-block">Job Applicants</a></li>
+                <li><a [class.active]="isActive(['/cms', '/cms/edit', '/cms/edit/home', '/cms/edit/about', '/cms/edit/services', '/cms/edit/management', '/cms/edit/career', '/cms/edit/contact'])" routerLink="/cms" class="py-[8px] px-[16px] w-full inline-block">CMS</a></li>
+                <li><a [class.active]="isActive(['/crud', '/crud/home-testimonial', '/crud/home-testimonial/add', '/crud/home-testimonial/edit/{$id}', '/crud/partner', '/crud/partner/add', '/crud/partner/edit/{$id}', '/crud/client', '/crud/client/add', '/crud/client/edit/{$id}', '/crud/team', '/crud/team/add', '/crud/team/edit/{$id}', '/crud/client-service', '/crud/client-service/add', '/crud/client-service/edit/{$id}', '/crud/service-category', '/crud/service-category/add', '/crud/service-category/edit/{$id}' ])" routerLink="/crud" class="py-[8px] px-[16px] w-full inline-block">Crud</a></li>
+                <!-- <li><a [class.active]="isActive(['/contact-request', '/contact-request/details/{$id}'])" routerLink="/contact-request" class="py-[8px] px-[16px] w-full inline-block">Contact Requests</a></li> -->
+            </ul>
+        </div>
+    
+        <div>
+            <a routerLink="/logout" class="rounded-[200px] border border-[#51131F] bg-[#FFDDE4] flex justify-center py-[8px]">Logout</a>
+        </div>
+    </div>
+</div>

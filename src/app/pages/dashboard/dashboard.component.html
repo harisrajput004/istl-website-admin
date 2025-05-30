@@ -1,0 +1,179 @@
+<div class="mt-[30px] font_inter flex flex-col gap-[10px]" *ngIf="showDashboard && !isInitialLoad">
+    <div class="grid grid-cols-3 gap-[20px]">
+        <div
+            class="flex justify-between gap-[24px] p-[20px] rounded-[10px] border border-[#CFCFCF] bg-[#F2F2F2] shadow-[0px_0px_37.327px_0px_rgba(0,0,0,0.05)]">
+            <div class="flex flex-col gap-[16px]">
+                <div class="flex justify-center items-center rounded-[90px] w-[50px] h-[50px] bg-[#FFF0F3]">
+                    <img class="w-[22px] h-22px" src="images/3persons.png" alt="">
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <p class="text-[#838383] font-normal">Total Jobs</p>
+                    <h3 class="text-[#1E1E1E] font-normal">{{ totalJobs }}</h3>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end items-end">
+                <!-- <app-dropdown [icon]="faEllipsisVertical" [options]="dropdownOptions"></app-dropdown> -->
+                <div class="rounded-[90px] py-[10px] px-[20px] bg-[#FFDDE4]">
+                    <p class="text-[#51131F] font-normal">
+                        <fa-icon [icon]="faArrowTrendUp"></fa-icon>
+                        10.0%
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div
+            class="flex justify-between gap-[24px] p-[20px] rounded-[10px] border border-[#CFCFCF] bg-[#F2F2F2] shadow-[0px_0px_37.327px_0px_rgba(0,0,0,0.05)]">
+            <div class="flex flex-col gap-[16px]">
+                <div class="flex justify-center items-center rounded-[90px] w-[50px] h-[50px] bg-[#FFF0F3]">
+                    <img class="w-[22px] h-22px" src="images/3persons.png" alt="">
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <p class="text-[#838383] font-normal">Applied Jobs</p>
+                    <h3 class="text-[#1E1E1E] font-normal">{{ appliedJobs }}</h3>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end items-end">
+                <!-- <app-dropdown [icon]="faEllipsisVertical" [options]="dropdownOptions"></app-dropdown> -->
+                <div class="rounded-[90px] py-[10px] px-[20px] bg-[#FFDDE4]">
+                    <p class="text-[#51131F] font-normal">
+                        <fa-icon [icon]="faArrowTrendUp"></fa-icon>
+                        10.0%
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div
+            class="flex justify-between gap-[24px] p-[20px] rounded-[10px] border border-[#CFCFCF] bg-[#F2F2F2] shadow-[0px_0px_37.327px_0px_rgba(0,0,0,0.05)]">
+            <div class="flex flex-col gap-[16px]">
+                <div class="flex justify-center items-center rounded-[90px] w-[50px] h-[50px] bg-[#FFF0F3]">
+                    <img class="w-[22px] h-22px" src="images/3persons.png" alt="">
+                </div>
+                <div class="flex flex-col gap-[10px]">
+                    <p class="text-[#838383] font-normal">Total Visitors</p>
+                    <h3 class="text-[#1E1E1E] font-normal">{{ totalVisitors }}</h3>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end items-end">
+                <!-- <app-dropdown [icon]="faEllipsisVertical" [options]="dropdownOptions"></app-dropdown> -->
+                <div class="rounded-[90px] py-[10px] px-[20px] bg-[#FFDDE4]">
+                    <p class="text-[#51131F] font-normal">
+                        <fa-icon [icon]="faArrowTrendUp"></fa-icon>
+                        10.0%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <section class="flex justify-between h-fit">
+        <div class="max-w-[825px] flex flex-col gap-[24px] overflow-x-auto w-full">
+            <div class="flex justify-between w-full">
+                <h3>Job Applicants</h3>
+                <!-- <button class="cursor-pointer text-[#FFF] px-[40px] py-[8px] rounded-[5px] bg-[#51131F]" type="button">View All</button> -->
+                <a class="cursor-pointer rounded-[5px] primary_button" routerLink="/job-applicants">View All</a>
+            </div>
+            <div *ngIf="!isLoading && applicants.length > 0" class="overflow-y-auto max-h-[283px]">
+                <table class="min-w-full rounded-[10px] border-separate border-spacing-y-[10px]">
+                    <thead class="bg-[#51131F]">
+                        <tr class="text-[#F2F2F2]">
+                            <th class="py-3 px-6 text-left text-sm font-normal rounded-l-[5px]">S. No</th>
+                            <th class="py-3 px-6 text-left text-sm font-normal">Name</th>
+                            <th class="py-3 px-6 text-left text-sm font-normal">Email</th>
+                            <th class="py-3 px-6 text-left text-sm font-normal">Job Applied</th>
+                            <th class="py-3 px-6 text-left text-sm font-normal rounded-r-[5px]"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="isLoading" class="loading-state">
+                            <td colspan="5" class="py-4">
+                                <div class="flex justify-center items-center h-64 w-full">
+                                    <div
+                                        class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#51131F]">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let applicant of applicants; let i = index;"
+                            class="bg-[#F2F2F2] rounded-[5px] p-[15px]">
+                            <td class="py-3 px-6">
+                                <p class="text-[#1D1D1D] font-normal">{{ i + 1 }}</p>
+                            </td>
+                            <td class="py-3 px-6 text-sm text-gray-700">
+                                <div class="flex gap-[10px] items-center">
+                                    <!-- <img class="w-[30px] h-[30px]" src="images/person.png" alt=""> -->
+                                    <p class="text-[#1D1D1D] font-normal">{{ applicant.fullName }}</p>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6">
+                                <p class="text-[#1D1D1D] font-normal">
+                                    {{ applicant.email }}
+                                </p>
+                            </td>
+                            <td class="py-3 px-6">
+                                <p class="text-[#1D1D1D] font-normal">
+                                    {{ applicant.jobName }}
+                                </p>
+                            </td>
+                            <td>
+                                <div class="flex gap-[10px] justify-center">
+                                    <a [routerLink]="'/job-applicants/details/' + applicant.id"
+                                        class="action-link py-[5px] px-[8px]">
+                                        <fa-icon [icon]="faEye" class="text-[#951C33]"></fa-icon>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div *ngIf="!isLoading && !errorMessage && applicants.length === 0"
+                    class="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg text-center">
+                    <div class="w-20 h-20 mb-4 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-medium text-gray-700 mb-2">No applicants found</h4>
+                    <p class="text-gray-500">There are currently no applicants for this position.</p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="bg-[#FFF]  flex flex-col gap-[20px] border-[1px] border-solid border-[#E7E7E7] rounded-[10px] font-normal font_inter max-w-[380px]">
+            <div class="flex justify-between w-full p-[20px]">
+                <h3>Notifications</h3>
+                <!-- <button class="cursor-pointer text-[#FFF] px-[40px] py-[8px] rounded-[5px] bg-[#51131F]" type="button">View All</button> -->
+                <a class="cursor-pointer rounded-[5px] primary_button" routerLink="/notifications">View All</a>
+            </div>
+            <div class="flex flex-col gap-[10px] overflow-y-auto max-h-[205px] px-[20px]">
+                <ng-container *ngIf="notifications && notifications.length > 0; else noNotifications">
+                    <div *ngFor="let notification of notifications"
+                        class="flex items-center bg-[#F2F2F2] border border-[#CBCBCB] rounded-[10px] p-[20px] gap-[24px]">
+                        <div class="flex flex-col justify-center">
+                            <p class="text-[16px] font-medium text-[#1B1B1B] leading-tight">
+                                {{ notification.message }}
+                            </p>
+                            <p class="font_14px text-[#777777]">{{ getTimeAgo(notification.created) }}</p>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-template #noNotifications>
+                    <div
+                        class="flex items-center justify-center bg-[#F2F2F2] border border-[#CBCBCB] rounded-[10px] p-[20px]">
+                        <p class="text-[16px] font-medium text-[#777777]">No notifications</p>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div *ngIf="!showDashboard || isInitialLoad"
+    class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#51131F]"></div>
+</div>

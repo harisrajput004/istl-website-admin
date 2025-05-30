@@ -1,0 +1,46 @@
+.image-upload-container {
+    margin: 1rem 0;
+  }
+  
+  .upload-area {
+    border: 2px dashed #ccc;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    
+    &:hover {
+      border-color: #999;
+    }
+  }
+  
+  .preview-container {
+    position: relative;
+    width: fit-content;
+  }
+  
+  .preview-image {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 4px;
+  }
+  
+  .remove-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &:hover {
+      background: #cc0000;
+    }
+  }

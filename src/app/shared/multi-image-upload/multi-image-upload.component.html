@@ -1,0 +1,15 @@
+<div class="multi-image-upload">
+    <label class="upload-box">
+        <input type="file" multiple (change)="onFileSelected($event)" accept="image/*" />
+        <span>Upload Images</span>
+    </label>
+
+    <div class="preview-container">
+        <div *ngFor="let image of images; let i = index" class="image-preview">
+            <img [src]="image.url" alt="Image preview" />
+            <button type="button" class="flex justify-center items-center" (click)="removeImage(i)">
+                <fa-icon [icon]="faXmark" class="text-white text-[10px] mt-[3px] p-0"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>

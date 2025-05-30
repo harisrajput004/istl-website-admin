@@ -1,0 +1,23 @@
+<div class="dropdown-wrapper relative inline-block text-left">
+    <!-- Dropdown Toggle Button -->
+    <button type="button" (click)="toggleDropdown()" class="cursor-pointer p-2 rounded-full hover:bg-gray-100">
+        <fa-icon *ngIf="icon" [icon]="icon" class="text-[#5A5A5A]"></fa-icon>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div *ngIf="isOpen"
+        class="absolute right-0 w-48 rounded-[10px] bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.1)]">
+        <ul class="py-1">
+            <li *ngFor="let option of options">
+                <a *ngIf="option.link" [href]="option.link"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    {{ option.label }}
+                </a>
+                <button *ngIf="!option.link" (click)="onOptionClick(option)"
+                    class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    {{ option.label }}
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

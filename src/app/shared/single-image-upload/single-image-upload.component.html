@@ -1,0 +1,21 @@
+<div class="image-upload-container">
+    <div *ngIf="!image.url" class="upload-area">
+      <label [for]="fileInputId" class="upload-label">
+        <span>Click to upload image</span>
+        <input 
+          [id]="fileInputId" 
+          type="file" 
+          accept="image/*" 
+          (change)="onFileSelected($event)"
+          style="display: none;"
+        >
+      </label>
+    </div>
+  
+    <div *ngIf="image.url" class="preview-container" [class.border-red-500]="isInvalid">
+      <img [src]="image.url" alt="Preview" class="preview-image">
+      <button type="button" (click)="removeImage()" class="remove-btn">
+        <fa-icon [icon]="faXmark" class="text-white text-[10px] mt-[3px] p-0"></fa-icon>
+      </button>
+    </div>
+  </div>

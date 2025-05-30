@@ -1,0 +1,72 @@
+
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <!-- <div class="flex justify-between w-full">
+        <h3>Add Home Page Testimonials</h3>
+    </div> -->
+    <div class="overflow-y-auto max-h-[525px]">
+        <form (ngSubmit)="onSubmit()" [formGroup]="clientServiceForm">
+    
+            <div class="py-[35px] px-[30px] rounded-t-[15px] rounded-br-none rounded-bl-none bg-[#F2F2F2]">
+                <div class="flex flex-col gap-[20px]">
+                    <h3 class="text-[#333] font-medium">Add Service</h3>
+            
+                    <div class="flex flex-col gap-[20px]">
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="serviceName">Client Service Name</label>
+                            <input id="serviceName" formControlName="serviceName"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                type="text">
+                            <div *ngIf="clientServiceForm.get('serviceName')?.touched && clientServiceForm.get('serviceName')?.errors" class="text-red-500">
+                                Service name is required
+                            </div>
+                        </div>
+    
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="description">Service Description</label>
+                            <textarea id="description" formControlName="description"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[100px] max-h-[200px] overflow-y-auto"
+                                rows="3"></textarea>
+                            <div *ngIf="clientServiceForm.get('description')?.touched && clientServiceForm.get('description')?.errors" class="text-red-500">
+                                Description is required
+                            </div>
+                        </div>
+    
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="serviceCategory">Service Category</label>
+                            <select id="serviceCategory" formControlName="serviceCategoryId"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal">
+                                <option value="">Select a category</option>
+                                <option *ngFor="let category of serviceCategories" [value]="category.id">
+                                    {{ category.serviceCategoryName }}
+                                </option>
+                            </select>
+                            <div *ngIf="clientServiceForm.get('serviceCategoryId')?.touched && clientServiceForm.get('serviceCategoryId')?.errors" class="text-red-500">
+                                Service category is required
+                            </div>
+                        </div>
+    
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="image">Image</label>
+                            <app-single-image-upload (imageSelected)="handleImage($event)" [isInvalid]="!!(clientServiceForm.get('image')?.touched && clientServiceForm.get('image')?.invalid)"></app-single-image-upload>
+                            <div *ngIf="clientServiceForm.get('image')?.touched && clientServiceForm.get('image')?.errors?.['required']" 
+                                class="text-red-500">
+                            Image is required
+                            </div>
+                        </div>
+    
+                        <div *ngIf="errorMessage" class="text-red-500 p-2">
+                            {{ errorMessage }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-[10px] w-full pb-[35px] px-[30px] bg-[#F2F2F2]">
+                <button type="submit" class="primary_button cursor-pointer" [disabled]="isSubmitting">
+                    <span *ngIf="!isSubmitting">Save</span>
+                    <span *ngIf="isSubmitting">Saving...</span>
+                </button>
+                <a routerLink="/crud" class="transarent_button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

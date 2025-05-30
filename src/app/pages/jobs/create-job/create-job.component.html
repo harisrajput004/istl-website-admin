@@ -1,0 +1,243 @@
+<section class="font_inter">
+    <div class="flex flex-col gap-[24px]">
+        <div>
+            <h3 class="text-[#010101] font-normal">Job Post</h3>
+        </div>
+        <div
+            class="p-[20px] rounded-[10px] border border-[#CFCFCF] bg-[#FAFBFB] shadow-[0_0_37.327px_0_rgba(0,0,0,0.05)] max-w-[1200px] flex flex-col overflow-y-auto max-h-[525px]">
+            <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+                <div class="flex flex-col gap-[24px]">
+                    <div class="flex flex-col gap-[18px]">
+                        <div class="flex flex-col gap-[8px]">
+                            <label class="font_14px text-[#18191C] font-normal">Job Title</label>
+                            <input formControlName="title"
+                                class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                placeholder="Add job title, role, vacancies etc" type="text">
+                            <div *ngIf="submitted && jobForm.get('title')?.invalid" class="text-red-500 text-sm">
+                                Job title is required
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-[18px]">
+                            <div class="flex flex-col gap-[8px]">
+                                <label class="font_14px text-[#18191C] font-normal">Job Tags</label>
+                                <div class="relative">
+                                    <div id="dropdownTrigger" (click)="toggleDropdown()"
+                                        class="flex flex-wrap gap-2 p-2 border border-[#A7A7A7] rounded-[5px] bg-[#FFF] min-h-[44px] cursor-pointer">
+                                        <span *ngIf="selectedTags.length === 0" class="text-gray-400">Select tag</span>
+                                        <div *ngFor="let tagId of selectedTags"
+                                            class="bg-gray-200 px-2 py-1 rounded-full text-sm flex items-center">
+                                            {{ getTagName(tagId) }}
+                                            <button type="button" (click)="removeTag(tagId); $event.stopPropagation()"
+                                                class="ml-1 text-red-500">×</button>
+                                        </div>
+                                        <div class="ml-auto text-gray-500">
+                                            <svg [ngClass]="{ 'rotate-180': isDropdownOpen }"
+                                                class="w-4 h-4 transition-transform duration-200" fill="none"
+                                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M6 9l6 6 6-6"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="submitted && selectedTags.length === 0"
+                                        class="mt-[8px] text-red-500 text-sm">
+                                        At least one job tag is required
+                                    </div>
+
+                                    <div *ngIf="isDropdownOpen" id="dropdown"
+                                        class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                                        <div *ngFor="let tag of tags"
+                                            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
+                                            <input type="checkbox" [id]="'tag-' + tag.id"
+                                                [checked]="selectedTags.includes(tag.id)"
+                                                (change)="onTagSelect(tag.id, $event)" class="mr-2">
+                                            <label [for]="'tag-' + tag.id">{{ tag.tagName }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Job Categories</label>
+                                <select formControlName="jobCategoryId"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]">
+                                    <option [value]="null">Select a category</option>
+                                    <option *ngFor="let category of categories" [value]="category.id">{{
+                                        category.jobCategoryName }}</option>
+                                </select>
+                                <div *ngIf="submitted && jobForm.get('jobCategoryId')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Category is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[18px]">
+                        <h5 class="text-[#18191C] font-medium">Salary</h5>
+                        <div class="grid grid-cols-3 gap-[18px]">
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Currency</label>
+
+                                <select formControlName="currency"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]">
+
+                                    <option value=' ' disabled>Select a currency</option>
+
+                                    <option *ngFor="let currency of currencies"
+                                        [value]="currency.code + ' ' + currency.symbol">
+                                        {{ currency.name }} ({{ currency.symbol }})
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && jobForm.get('currency')?.invalid" class="text-red-500 text-sm">
+                                    Currency is required
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Min Salary</label>
+                                <input formControlName="minSalary" type="number"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                    placeholder="Minimum salary">
+                                <div *ngIf="submitted && jobForm.get('minSalary')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Valid minimum salary is required
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Max Salary</label>
+                                <input formControlName="maxSalary" type="number"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                    placeholder="Maximum salary">
+                                <div *ngIf="submitted && jobForm.get('maxSalary')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Valid maximum salary is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-[18px]">
+                        <h5 class="text-[#18191C] font-medium">Location</h5>
+                        <div class="grid grid-cols-3 gap-[18px]">
+                            <div class="flex flex-col gap-[8px]">
+                                <label for="city" class="font_14px text-[#18191C] font-normal">City</label>
+                                <input id="city" formControlName="city"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                    [class.border-red-500]="jobForm.get('city')?.invalid && (jobForm.get('city')?.dirty || jobForm.get('city')?.touched)"
+                                    placeholder="Enter city name" type="text"
+                                    (input)="jobForm.get('city')?.updateValueAndValidity()">
+                                <div *ngIf="(jobForm.get('city')?.invalid && (jobForm.get('city')?.dirty || jobForm.get('city')?.touched)) || 
+                                            (submitted && jobForm.get('city')?.invalid)" class="text-red-500 text-sm">
+                                    <span *ngIf="jobForm.get('city')?.errors?.['required']">City is required</span>
+                                    <span *ngIf="jobForm.get('city')?.errors?.['lettersOnly']">City should only contain
+                                        letters</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px]">
+                                <label for="country" class="font_14px text-[#18191C] font-normal">Country</label>
+                                <input id="country" formControlName="country"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                    [class.border-red-500]="jobForm.get('country')?.invalid && (jobForm.get('country')?.dirty || jobForm.get('country')?.touched)"
+                                    placeholder="Enter country name"
+                                    (input)="jobForm.get('country')?.updateValueAndValidity()" type="text">
+                                <div *ngIf="(jobForm.get('country')?.invalid && (jobForm.get('country')?.dirty || jobForm.get('country')?.touched)) || 
+                                            (submitted && jobForm.get('country')?.invalid)"
+                                    class="text-red-500 text-sm">
+                                    <span *ngIf="jobForm.get('country')?.errors?.['required']">Country is
+                                        required</span>
+                                    <span *ngIf="jobForm.get('country')?.errors?.['lettersOnly']">Country should only
+                                        contain letters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[18px]">
+                        <h5 class="text-[#18191C] font-medium">Advance Information</h5>
+                        <div class="grid grid-cols-3 gap-[18px]">
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Experience (Years)</label>
+                                <input formControlName="experienceYearsRequired" type="number"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                    placeholder="Years of experience">
+                                <div *ngIf="submitted && jobForm.get('experienceYearsRequired')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Valid experience is required
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Vacancies</label>
+                                <input formControlName="vacancies" type="number"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]"
+                                    placeholder="Number of vacancies">
+                                <div *ngIf="submitted && jobForm.get('vacancies')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Valid vacancy value is required
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Expiration Date</label>
+                                <input formControlName="expiresOn" type="datetime-local" [min]="getMinDate()"
+                                    class="w-full text-[#9199A3] text-[16px] font-normal px-[18px] py-[12px] rounded-[5px] border border-[#A7A7A7] bg-[#FFF]">
+                                <div *ngIf="submitted && jobForm.get('expiresOn')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    <span *ngIf="jobForm.get('expiresOn')?.errors?.['required']">Expiration date is
+                                        required</span>
+                                    <span *ngIf="jobForm.get('expiresOn')?.errors?.['minDate']">
+                                        Date must be at least {{
+                                        jobForm.get('expiresOn')?.errors?.['minDate'].requiredDate | date:'mediumDate'
+                                        }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[18px]">
+                        <h5 class="text-[#18191C] font-medium">Description & Responsibility</h5>
+                        <div class="grid grid-cols-1 gap-[18px]">
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Description</label>
+                                <div class="w-full overflow-hidden">
+                                    <quill-editor formControlName="description"
+                                        class="w-full text-[#9199A3] text-[16px] font-normal rounded-[6px] border border-[#A7A7A7] bg-[#FFF]"
+                                        [styles]="{'min-height': '150px'}" placeholder="Add your job description...">
+                                    </quill-editor>
+                                </div>
+                                <div *ngIf="submitted && jobForm.get('description')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Description is required
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[8px] col-span-1">
+                                <label class="font_14px text-[#18191C] font-normal">Responsibilities</label>
+                                <div class="w-full overflow-hidden">
+                                    <quill-editor formControlName="responsibilities"
+                                        class="w-full text-[#9199A3] text-[16px] font-normal rounded-[6px] border border-[#A7A7A7] bg-[#FFF]"
+                                        [styles]="{'min-height': '150px'}"
+                                        placeholder="Add your job responsibilities...">
+                                    </quill-editor>
+                                </div>
+                                <div *ngIf="submitted && jobForm.get('responsibilities')?.invalid"
+                                    class="text-red-500 text-sm">
+                                    Responsibilities are required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button type="submit" [disabled]="isLoading"
+                            class="primary_button max-w-[240px] cursor-pointer">
+                            {{ isLoading ? 'Creating...' : 'Post A Job' }}
+                        </button>
+                        <a routerLink="/jobs" class="transarent_button cursor-pointer">Cancel</a>
+                    </div>
+
+                    <div *ngIf="errorMessage" class="p-3 bg-red-100 text-red-700 rounded">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

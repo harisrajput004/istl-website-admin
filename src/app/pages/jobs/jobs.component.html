@@ -1,0 +1,83 @@
+<section class="font_inter my-[30px]">
+    <div class="flex flex-col gap-[20px]">
+        <div class="flex justify-between">
+            <h3 class="text-[#010101] font-normal">Jobs</h3>
+            <a routerLink="/jobs/create" class="primary_button">Create a job</a>
+        </div>
+        <div class="grid grid-cols-3 gap-[20px] overflow-y-auto max-h-[455px]">
+            <div *ngFor="let job of jobs"
+                class="p-[20px] rounded-[10px] border border-[#CBCBCB] bg-[#FAFBFB] flex flex-col gap-[10px]">
+                <div class="flex gap-[10px] items-center pb-[7px] border-b border-[#BABABA]">
+                    <div class="w-[70px] h-[70px] flex justify-center items-center rounded-[6px]"
+                        [ngStyle]="{'background-color': '#FFDDE4'}">
+                        <img [src]="job.jobCategoryImage" class="w-[30px] h-[30px] object-contain" alt="{{ job.title }}"
+                            onerror="this.src='assets/images/default-job.png'">
+                    </div>
+                    <div class="flex flex-col gap-[10px] w-full">
+                        <div class="flex justify-between w-full">
+                            <h5>{{ job.title }}</h5>
+                            <div class="px-[5px] py-[2px] rounded-[5px]"
+                                [style.background]="job.jobStatusId === 1 ? '#FFDDE4' : '#E0F7FA'">
+                                <p class="font_14px" [style.color]="job.jobStatusId === 1 ? '#51131F' : '#00796B'">
+                                    {{ job.jobStatusName }}
+                                </p>
+                            </div>
+                            <label class="flex items-center cursor-pointer" *ngIf="canDelete">
+                                <div class="relative">
+                                    <input type="checkbox" [checked]="job.jobStatusId === 1" 
+                                        (change)="toggleJobStatus(job)" class="hidden">
+
+                                    <div class="w-[31px] h-[18px] rounded-full transition-colors duration-300"
+                                        [ngClass]="{
+                                         'bg-green-500': job.jobStatusId === 1,
+                                         'bg-gray-300': job.jobStatusId !== 1
+                                       }">
+                                        <div class="absolute w-4 h-4 bg-white rounded-full transition-transform duration-300"
+                                            [ngClass]="{ 'translate-x-3': job.jobStatusId === 1 }"
+                                            style="top: 1px; left: 1px;"></div>
+                                    </div>
+                                </div>
+                            </label>
+
+
+                        </div>
+                        <div class="flex gap-[12px] flex-wrap">
+                            <div *ngFor="let tag of job.jobTags" class="px-[3px] py-[2px] rounded-[5px] bg-[#FFF2CC]">
+                                <p class="font_14px text-[#A97B00]">{{ tag.tagName }}</p>
+                            </div>
+                            <div class="px-[3px] py-[2px] rounded-[5px] bg-[#F1F2F4]">
+                                <p class="font_14px text-[#232323]">{{ getDaysRemaining(job.expiresOn) }} days remaining
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col pb-[7px] border-b border-[#BABABA]">
+                    <h5 class="text-[#959595] font-normal">Salary Range</h5>
+                    <h5 class="text-[#000] font-medium">{{job.currency}} {{ job.minSalary }} - {{job.currency}} {{
+                        job.maxSalary }}</h5>
+                </div>
+                <div class="flex flex-col pb-[7px] border-b border-[#BABABA]">
+                    <h5 class="text-[#959595] font-normal">Applications</h5>
+                    <h5 class="text-[#000] font-medium">{{ job.totalJobApplications || 0 }} Applications</h5>
+                </div>
+                <div class="flex flex-col pb-[7px] border-b border-[#BABABA]">
+                    <h5 class="text-[#959595] font-normal">Experience Required</h5>
+                    <p class="font-normal font_14px text-[#000]">{{ job.experienceYearsRequired }} years</p>
+                </div>
+                <div class="flex flex-col pb-[7px] border-b border-[#BABABA]">
+                    <h5 class="text-[#959595] font-normal">Vacancies</h5>
+                    <p class="font-normal font_14px text-[#000]">{{job.vacancies}}</p>
+                </div>
+                <div class="flex flex-col pb-[7px] border-b border-[#BABABA]" *ngIf="job.country && job.city">
+                    <h5 class="text-[#959595] font-normal">Location</h5>
+                    <p class="font-normal font_14px text-[#000]">{{ job.country }}, {{ job.city }}</p>
+                </div>
+                <div class="flex justify-center gap-[10px] w-full">
+                    <a [routerLink]="['/job/edit/' + job.id]" class="primary_button cursor-pointer px-4 py-2">Update</a>
+                    <a [routerLink]="['/job-applicants/'+ job.id]" class="primary_button">View Applicants</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

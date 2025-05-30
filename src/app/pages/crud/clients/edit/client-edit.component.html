@@ -1,0 +1,70 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <!-- <div class="flex justify-between w-full">
+        <h3>Add Home Page Testimonials</h3>
+    </div> -->
+    <div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter overflow-y-auto max-h-[465px]">
+        <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
+
+            <div class="py-[35px] px-[30px] rounded-t-[15px] rounded-br-none rounded-bl-none bg-[#F2F2F2]">
+                <div class="flex flex-col gap-[20px]">
+                    <h3 class="text-[#333] font-medium">Edit Client</h3>
+
+                    <div class="flex flex-col gap-[20px]">
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="name">Client name</label>
+                            <input id="name" formControlName="name"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                type="text">
+                            <div *ngIf="clientForm.get('name')?.touched && clientForm.get('name')?.errors"
+                                class="text-red-500">
+                                Client name is required
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="url">URL</label>
+                            <input (input)="onUrlInput()" id="url" formControlName="url"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                type="text">
+                            <div *ngIf="(clientForm.get('url')?.touched || clientForm.get('url')?.dirty) && clientForm.get('url')?.errors"
+                                class="text-red-500">
+                                <div *ngIf="clientForm.get('url')?.errors?.['required']">URL is required</div>
+                                <div *ngIf="clientForm.get('url')?.errors?.['containsNumbers']">URL cannot contain
+                                    numbers
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="image">Image</label>
+                            <div *ngIf="currentImageUrl" class="mb-3">
+                                <p class="text-sm text-gray-500 mb-1">Current Image:</p>
+                                <img [src]="currentImageUrl" alt="Current testimonial image"
+                                    class="w-20 h-20 object-cover rounded">
+                            </div>
+                            <app-single-image-upload (imageSelected)="handleImage($event)"
+                                [isInvalid]="!!(clientForm.get('image')?.touched && clientForm.get('image')?.invalid)">
+                            </app-single-image-upload>
+                            <div *ngIf="clientForm.get('image')?.touched && clientForm.get('image')?.errors?.['required']"
+                                class="text-red-500">
+                                {{ hasDeletedImage ? 'You must provide an image' : 'Image is required' }}
+                            </div>
+                            <div class="text-sm text-gray-500">Leave empty to keep current image</div>
+                        </div>
+
+                        <div *ngIf="errorMessage" class="text-red-500 p-2">
+                            {{ errorMessage }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-[10px] w-full pb-[35px] px-[30px] bg-[#F2F2F2]">
+                <button type="submit" class="primary_button cursor-pointer" [disabled]="isSubmitting">
+                    <span *ngIf="!isSubmitting">Save</span>
+                    <span *ngIf="isSubmitting">Saving...</span>
+                </button>
+                <a routerLink="/crud" class="transarent_button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

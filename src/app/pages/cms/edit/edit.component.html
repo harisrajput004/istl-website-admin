@@ -1,0 +1,89 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <div class="flex justify-between w-full">
+        <h3>Homepage</h3>
+    </div>
+    <div class="py-[35px] px-[30px] rounded-[15px] bg-[#F2F2F2]">
+        <div class="flex flex-col gap-[20px]">
+            <h3 class="text-[#333] font-medium">Section 1</h3>
+
+            <form action="" class="flex flex-col gap-[20px]">
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="">Title</label>
+                    <input
+                        class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-nornmal"
+                        type="text" value="About Us">
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="description">Description</label>
+                    <textarea id="description"
+                        class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[100px] max-h-[200px] overflow-y-auto"
+                        rows="3">Travel your way with unforgettable experiences,</textarea>
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="">Image 1</label>
+                    <app-multi-image-upload (imagesSelected)="handleImages($event)"></app-multi-image-upload>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="py-[35px] px-[30px] rounded-[15px] bg-[#F2F2F2]">
+        <div class="flex flex-col gap-[20px]">
+            <h3 class="text-[#333] font-medium">Section 2</h3>
+
+            <form action="" class="flex flex-col gap-[20px]">
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="">Title</label>
+                    <input
+                        class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-nornmal"
+                        type="text" value="Pharetra Etiam Inceptos">
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="description">Description</label>
+                    <textarea id="description"
+                        class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[100px] max-h-[200px] overflow-y-auto"
+                        rows="3">tiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Aenean lacinia. tiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Aenean lacinia.</textarea>
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="">Image 1</label>
+                    <app-multi-image-upload (imagesSelected)="handleImages($event)"></app-multi-image-upload>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="py-[35px] px-[30px] rounded-[15px] bg-[#F2F2F2]">
+        <div class="flex flex-col gap-[20px]">
+            <h3 class="text-[#333] font-medium">Section 3</h3>
+
+            <form action="" class="flex flex-col gap-[20px]">
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="">Title</label>
+                    <input
+                        class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-nornmal"
+                        type="text" value="About Services">
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="description">Description</label>
+                    <textarea id="description"
+                        class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[100px] max-h-[200px] overflow-y-auto"
+                        rows="3">Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Aenean lacinia. Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam
+
+Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+Maecenas faucibus mollis interdum.
+                    </textarea>
+                </div>
+                <div class="flex flex-col gap-[15px]">
+                    <label class="text-[#333] font-medium" for="">Image 1</label>
+                    <app-multi-image-upload (imagesSelected)="handleImages($event)"></app-multi-image-upload>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="flex justify-end gap-[10px] w-full">
+        <a referrerpolicy="/cms" class="primary_button">Save</a>
+        <a routerLink="/cms" class="transarent_button">Cancel</a>
+    </div>
+</div>

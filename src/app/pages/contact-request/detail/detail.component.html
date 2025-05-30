@@ -1,0 +1,21 @@
+<div class="font-normal font_inter font-[#010101] py-8">
+    <h3>Contact Request</h3>
+  </div>
+  
+  <div *ngIf="contactRequest" class="bg-[#FFF] rounded-[20px] py-[40px] px-[30px] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.05)]">
+  
+    <div class="font-normal font_inter pt-2 flex flex-col space-y-2 text-[#454545]">
+      <h3 class="text-[24px] text-[#010101] font-semibold">{{ contactRequest.fullName }}</h3>
+      <p>Email: {{ contactRequest.email }}</p>
+      <p>Phone Number: {{ contactRequest.phoneNo }}</p>
+    </div>
+  
+    <div class="text-[#454545] pt-5 flex flex-col">
+      <h5 class="font-bold">Message</h5>
+      <p class="font_14px py-[15px]">
+        {{ contactRequest.message }}
+      </p>
+    </div>
+
+  </div>
+  

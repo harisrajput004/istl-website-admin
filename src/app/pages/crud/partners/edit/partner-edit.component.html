@@ -1,0 +1,170 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <!-- <div class="flex justify-between w-full">
+        <h3>Add Home Page Testimonials</h3>
+    </div> -->
+    <div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter overflow-y-auto max-h-[465px]">
+        <form (ngSubmit)="onSubmit()" [formGroup]="partnerForm">
+
+            <div class="py-[35px] px-[30px] rounded-t-[15px] rounded-br-none rounded-bl-none bg-[#F2F2F2]">
+                <div class="flex flex-col gap-[20px]">
+                    <h3 class="text-[#333] font-medium">Edit Partner</h3>
+
+                    <div class="flex flex-col gap-[20px]">
+                        <div class="flex gap-[10px] w-full">
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="firstName">Partner First Name</label>
+                                <input id="firstName" formControlName="firstName"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('firstName')?.touched && partnerForm.get('firstName')?.errors"
+                                    class="text-red-500">
+                                    First name is required
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="lastName">Partner Last Name</label>
+                                <input id="lastName" formControlName="lastName"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('lastName')?.touched && partnerForm.get('lastName')?.errors"
+                                    class="text-red-500">
+                                    Last name is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px] w-[50%]">
+                            <label class="text-[#333] font-medium" for="title">Title</label>
+                            <input id="title" formControlName="title"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                type="text">
+                            <div *ngIf="partnerForm.get('title')?.touched && partnerForm.get('title')?.errors"
+                                class="text-red-500">
+                                Title is required
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="description">Description</label>
+                            <textarea id="description" formControlName="description"
+                                class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal resize-none min-h-[100px] max-h-[200px] overflow-y-auto"
+                                rows="3"></textarea>
+                            <div *ngIf="partnerForm.get('description')?.touched && partnerForm.get('description')?.errors"
+                                class="text-red-500">
+                                Description is required
+                            </div>
+                        </div>
+
+                        <div class="flex gap-[10px] w-full">
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="twitterURL">Twitter URL</label>
+                                <input (input)="onSocialUrlInput('twitterURL')" id="twitterURL"
+                                    formControlName="twitterURL"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('twitterURL')?.touched && partnerForm.get('twitterURL')?.errors"
+                                    class="text-red-500">
+                                    <div *ngIf="partnerForm.get('twitterURL')?.errors?.['required']">Twitter URL is
+                                        required
+                                    </div>
+                                    <div *ngIf="partnerForm.get('twitterURL')?.errors?.['pattern']">Please enter a valid
+                                        Twitter URL</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="linkedinURL">Linkedin URL</label>
+                                <input (input)="onSocialUrlInput('linkedinURL')" id="linkedinURL"
+                                    formControlName="linkedinURL"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('linkedinURL')?.touched && partnerForm.get('linkedinURL')?.errors"
+                                    class="text-red-500">
+                                    <div *ngIf="partnerForm.get('linkedinURL')?.errors?.['required']">LinkedIn URL is
+                                        required</div>
+                                    <div *ngIf="partnerForm.get('linkedinURL')?.errors?.['pattern']">Please enter a
+                                        valid
+                                        LinkedIn URL</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-[10px] w-full">
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="tiktokURL">Tiktok URL</label>
+                                <input (input)="onSocialUrlInput('tiktokURL')" id="tiktokURL"
+                                    formControlName="tiktokURL"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('tiktokURL')?.touched && partnerForm.get('tiktokURL')?.errors"
+                                    class="text-red-500">
+                                    <div *ngIf="partnerForm.get('tiktokURL')?.errors?.['required']">TikTok URL is
+                                        required
+                                    </div>
+                                    <div *ngIf="partnerForm.get('tiktokURL')?.errors?.['pattern']">Please enter a valid
+                                        TikTok URL</div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="websiteURL">Website URL</label>
+                                <input (input)="onSocialUrlInput('websiteURL')" id="websiteURL"
+                                    formControlName="websiteURL"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('websiteURL')?.touched && partnerForm.get('websiteURL')?.errors"
+                                    class="text-red-500">
+                                    <div *ngIf="partnerForm.get('websiteURL')?.errors?.['required']">Website URL is
+                                        required
+                                    </div>
+                                    <div *ngIf="partnerForm.get('websiteURL')?.errors?.['pattern']">Please enter a valid
+                                        Website URL</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-col gap-[15px] w-[50%]">
+                                <label class="text-[#333] font-medium" for="email">Email</label>
+                                <input id="email" formControlName="email"
+                                    class="px-[20px] py-[8px] rounded-[5px] bg-[#F6F6F6] shadow-[0px_0px_3px_0px_rgba(66,156,214,0.38)] text-[#292929] font-normal"
+                                    type="text">
+                                <div *ngIf="partnerForm.get('email')?.touched && partnerForm.get('email')?.errors"
+                                    class="text-red-500">
+                                    Email is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-[15px]">
+                            <label class="text-[#333] font-medium" for="image">Image</label>
+                            <div *ngIf="currentImageUrl" class="mb-3">
+                                <p class="text-sm text-gray-500 mb-1">Current Image:</p>
+                                <img [src]="currentImageUrl" alt="Current testimonial image"
+                                    class="w-20 h-20 object-cover rounded">
+                            </div>
+                            <app-single-image-upload (imageSelected)="handleImage($event)"
+                                [isInvalid]="!!(partnerForm.get('image')?.touched && partnerForm.get('image')?.invalid)">
+                            </app-single-image-upload>
+                            <div *ngIf="partnerForm.get('image')?.touched && partnerForm.get('image')?.errors?.['required']"
+                                class="text-red-500">
+                                {{ hasDeletedImage ? 'You must provide an image' : 'Image is required' }}
+                            </div>
+                            <div class="text-sm text-gray-500">Leave empty to keep current image</div>
+                        </div>
+
+                        <div *ngIf="errorMessage" class="text-red-500 p-2">
+                            {{ errorMessage }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-[10px] w-full pb-[35px] px-[30px] bg-[#F2F2F2]">
+                <button type="submit" class="primary_button cursor-pointer" [disabled]="isSubmitting">
+                    <span *ngIf="!isSubmitting">Save</span>
+                    <span *ngIf="isSubmitting">Saving...</span>
+                </button>
+                <a routerLink="/crud" class="transarent_button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

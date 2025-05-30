@@ -1,0 +1,20 @@
+
+
+.links li a{
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+
+.links li a:hover{
+    background: #FFDDE4;
+    color: #51131F;
+}
+
+
+.active {
+    background: #FFDDE4;
+    color: #51131F !important;
+}

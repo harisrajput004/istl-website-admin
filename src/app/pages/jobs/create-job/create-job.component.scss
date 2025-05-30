@@ -1,0 +1,16 @@
+::ng-deep .ql-editor {
+    min-height: 150px;
+}
+
+.border-red-500 {
+    border-color: #ef4444 !important;
+    /* Tailwind's red-500 */
+}
+
+input:invalid {
+    box-shadow: none;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: #ef4444;
+}

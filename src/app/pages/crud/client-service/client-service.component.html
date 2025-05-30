@@ -1,0 +1,30 @@
+<div class="my-[30px] flex flex-col gap-[24px] overflow-x-auto w-full font_inter">
+    <div class="flex justify-between w-full">
+        <h3>Services</h3>
+        <a routerLink="/crud/client-service/add" class="primary_button cursor-pointer px-4 py-2">Add</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] overflow-y-auto max-h-[450px]">
+        <div *ngFor="let service of clientServices"
+            class="bg-[#F2F2F2] p-5 rounded-[10px] shadow-md relative flex flex-col justify-between">
+            <!-- Conditionally show delete button -->
+            <button *ngIf="canDelete" (click)="deleteClientService(service.id)"
+                class="absolute top-3 right-3 text-[#51131F] cursor-pointer hover:text-red-600">
+                <fa-icon [icon]="faTrashCan" size="lg"></fa-icon>
+            </button>
+            <div>
+                <div class="flex gap-[15px] items-center">
+                    <img [src]="service.imagePath" alt="Service Image"
+                        class="w-[60px] h-[60px] rounded-full object-cover">
+                    <div>
+                        <h4 class="text-lg font-semibold">{{ service.serviceName }}</h4>
+                    </div>
+                </div>
+                <p class="mt-3 text-gray-700 line-clamp-2">{{ service.description }}</p>
+            </div>
+            <div class="flex justify-end gap-[10px] mt-4">
+                <a [routerLink]="['/crud/client-service/edit/'+ service.id]"
+                    class="primary_button cursor-pointer px-4 py-2">Update</a>
+            </div>
+        </div>
+    </div>
+</div>

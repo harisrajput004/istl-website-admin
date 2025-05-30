@@ -1,0 +1,30 @@
+<div>
+  <div class="flex justify-between items-center pt-8">
+    <h3>Notifications</h3>
+  </div>
+
+  <div class="flex flex-col pt-4 overflow-y-auto max-h-[515px] gap-2">
+    <ng-container *ngIf="notifications?.length; else noNotifications">
+      <div *ngFor="let notification of notifications"
+        class="flex items-center bg-[#F2F2F2] border border-[#CBCBCB] rounded-[10px] p-3 gap-3 hover:bg-gray-100 transition-colors">
+        <div class="flex flex-col justify-center flex-1 min-w-0">
+          <p class="text-base font-medium text-[#1B1B1B] leading-tight truncate">
+            {{ notification.message }}
+          </p>
+          <p class="text-xs text-[#777777] mt-1">{{ getTimeAgo(notification.created) }}</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noNotifications>
+      <div class="flex flex-col items-center justify-center py-8 text-center">
+        <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+          </path>
+        </svg>
+        <p class="text-gray-500 font-medium">No notifications</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

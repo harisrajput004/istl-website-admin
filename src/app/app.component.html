@@ -1,0 +1,26 @@
+<ng-container *ngIf="!isLoading || !isBrowser">
+
+
+  <ng-container
+    *ngIf="router.url.includes('/login') || router.url.includes('/forgot-password') || router.url.includes('/link-expired') || router.url.includes('/reset-password') || router.url === '/'; else dashboardLayout">
+    <router-outlet></router-outlet>
+  </ng-container>
+
+  <ng-template #dashboardLayout>
+    <div class="relative">
+      <div class="flex gap-[20px] mx-[20px] my-[30px]">
+        <app-sidebar class="w-fit block"></app-sidebar>
+        <div class="w-full">
+          <div class="h-fit">
+            <app-header></app-header>
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>
+
+<div *ngIf="isLoading && isBrowser" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+  <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+</div>

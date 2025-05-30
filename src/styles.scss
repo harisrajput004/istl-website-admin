@@ -1,0 +1,115 @@
+@use "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+@font-face {
+    font-family: 'Aileron';
+    src:
+        url('/fonts/Aileron/Aileron.woff2') format('woff2'),
+        url('/fonts/Aileron/Aileron.woff') format('woff'),
+        url('/fonts/Aileron/Aileron.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #F6F6F6;
+}
+
+.font_inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.font_helvetica_nue {
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.font_aileron {
+    font-family: "Aileron", sans-serif;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 16px;
+}
+
+.primary_button {
+    padding: 12px 24px;
+    border-radius: 48px;
+    background: #51131F;
+    color: #F8F8F8;
+    text-align: center;
+    border: 1px solid #51131F;
+}
+
+.primary_button:hover {
+    background: #F8F8F8;
+    color: #51131F;
+    border: 1px solid #51131F;
+}
+
+.transarent_button {
+    border-radius: 48px;
+    border: 1px solid #951C33;
+    padding: 12px 16px;
+}
+
+.font_12px {
+    font-size: 12px;
+}
+
+.font_14px {
+    font-size: 14px;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+    width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #51131F;
+    border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #3e0f18;
+}
+
+.overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #51131F #f0f0f0;
+}
+
+.primary_button {
+    border-radius: 48px;
+    border: 1px solid #FFF;
+    background: #51131F;
+    padding: 12px 24px;
+    color: white;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
